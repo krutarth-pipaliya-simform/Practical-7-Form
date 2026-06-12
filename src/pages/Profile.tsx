@@ -1,7 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 export const Profile = () => {
-    const navigate = useNavigate();
-    if (localStorage.getItem("isLoggedIn") !== "true") navigate("/signup");
+    if (!isLoggedIn()) return <Navigate to={"/signup"} />;
     return <div>Profile</div>;
+};
+
+const isLoggedIn = () => {
+    return localStorage.getItem("isLoggedIn") === "true";
 };

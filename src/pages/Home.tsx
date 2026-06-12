@@ -1,3 +1,6 @@
+import { Navigate } from "react-router-dom";
+
 export const Home = () => {
-    return <div>Home</div>;
+    if (localStorage.getItem("isLoggedIn") === "true") <Navigate to={"/profile"} />;
+    return <Navigate to={"/signup"} />;
 };
