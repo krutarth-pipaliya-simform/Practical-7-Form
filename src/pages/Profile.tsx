@@ -1,8 +1,42 @@
 import { Navigate } from "react-router-dom";
 
+import { signUpSchema } from "../schema/signUpSchema";
+
 export const Profile = () => {
     if (!isLoggedIn()) return <Navigate to={"/signup"} />;
-    return <div>Profile</div>;
+    const localData = localStorage.getItem("signUpData");
+    const {
+        success,
+        data: {
+            profileImageLink,
+            firstName,
+            lastName,
+            email,
+            contactNumber,
+            address,
+            age,
+            city,
+            state,
+        },
+    } = signUpSchema.safeParse(JSON.parse(localData));
+    if (!success) {
+        alert("Please signup if not already");
+    }
+    return (
+        <div>
+            <img src={profileImageLink} alt="Profile-picture" />
+            <div>
+                <span>{firstName + " "}</span>
+                <span>{lastName + " "}</span>
+                <span>{age} Years Old</span>
+            </div>
+            <div>{email}</div>
+            <div>{contactNumber}</div>
+            <div>{address}</div>
+            <div>{city}</div>
+            <div>{state}</div>
+        </div>
+    );
 };
 
 const isLoggedIn = () => {
