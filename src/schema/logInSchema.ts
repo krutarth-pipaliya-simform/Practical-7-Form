@@ -1,7 +1,7 @@
 import z from "zod";
 
 export const logInSchema = z.object({
-    email: z.email(),
+    email: z.email({ error: "Please enter a valid email" }),
     password: z
         .string()
         .min(8, { message: "Password must be at least 8 characters long." })

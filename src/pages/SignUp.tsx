@@ -122,7 +122,7 @@ export const SignUp = () => {
             <TextField
                 id="password"
                 label="Password"
-                type="text"
+                type="password"
                 variant="outlined"
                 {...register("password")}
             />
@@ -131,7 +131,7 @@ export const SignUp = () => {
             <TextField
                 id="confirmPassword"
                 label="Confirm Password"
-                type="text"
+                type="password"
                 variant="outlined"
                 {...register("confirmPassword")}
             />
@@ -155,5 +155,3 @@ export const SignUp = () => {
         </form>
     );
 };
-
-// "Already a member? Login here" link that redirects the users to Login page
