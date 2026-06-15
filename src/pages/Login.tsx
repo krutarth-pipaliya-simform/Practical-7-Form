@@ -22,16 +22,18 @@ export const Login = () => {
             className="p-4 mx-auto max-w-1/2 flex flex-col gap-6 border rounded-lg"
             onSubmit={handleSubmit((data) => {
                 const localData = localStorage.getItem("signUpData");
-                const signUpData = JSON.parse(localData);
+                const signUpData = JSON.parse(localData ?? " ");
+
                 if (signUpData?.email === data.email && signUpData?.password === data.password) {
-                    navigate("/profile");
                     localStorage.setItem("isLoggedIn", "true");
+                    navigate("/profile");
                 }
             })}
         >
             <h1 className="text-3xl text-center">Log In</h1>
 
             <TextField id="email" label="E-mail" variant="outlined" {...register("email")} />
+            {errors.email && <p className="text-red-500">{errors.email.message}</p>}
 
             <TextField
                 id="password"

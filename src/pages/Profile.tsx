@@ -5,23 +5,22 @@ import { signUpSchema } from "../schema/signUpSchema";
 export const Profile = () => {
     if (!isLoggedIn()) return <Navigate to={"/signup"} />;
     const localData = localStorage.getItem("signUpData");
-    const {
-        success,
-        data: {
-            profileImageLink,
-            firstName,
-            lastName,
-            email,
-            contactNumber,
-            address,
-            age,
-            city,
-            state,
-        },
-    } = signUpSchema.safeParse(JSON.parse(localData));
+    const { success, data } = signUpSchema.safeParse(JSON.parse(localData ?? " "));
     if (!success) {
         alert("Please signup if not already");
+        return <Navigate to="/signup" />;
     }
+    const {
+        profileImageLink,
+        firstName,
+        lastName,
+        email,
+        contactNumber,
+        address,
+        age,
+        city,
+        state,
+    } = data;
     return (
         <div>
             <img src={profileImageLink} alt="Profile-picture" />

@@ -11,7 +11,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { signUpSchema, type SignupFormDataType } from "../schema/signUpSchema";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const SignUp = () => {
     const {
@@ -22,11 +22,13 @@ export const SignUp = () => {
         resolver: zodResolver(signUpSchema),
         defaultValues: { birthDate: "1947-08-15" },
     });
+    const navigate = useNavigate();
 
     return (
         <form
             onSubmit={handleSubmit((data) => {
                 localStorage.setItem("signUpData", JSON.stringify(data));
+                navigate("/login");
             })}
             className="p-4 mx-auto max-w-1/2 flex flex-col gap-6 border rounded-lg"
         >
