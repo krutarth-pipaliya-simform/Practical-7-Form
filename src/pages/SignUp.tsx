@@ -119,9 +119,7 @@ export const SignUp = () => {
                 variant="outlined"
                 {...register("birthDate")}
             />
-            {errors.profileImageLink && (
-                <p className="text-red-500">{errors.profileImageLink.message}</p>
-            )}
+            {errors.birthDate && <p className="text-red-500">{errors.birthDate.message}</p>}
 
             <TextField
                 id="password"

@@ -1,13 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Profile } from "../pages/Profile";
 import { SignUp } from "../pages/SignUp";
-import { Home } from "../pages/Home";
+import { Redirector } from "../pages/Redirector";
 import { Login } from "../pages/Login";
 
 export const Router = createBrowserRouter([
     {
         index: true,
-        element: <Home />,
+        element: <Redirector />,
     },
     {
         path: "/signup",
@@ -18,7 +18,7 @@ export const Router = createBrowserRouter([
         element: <Login />,
     },
     {
-        path: "/Profile",
+        path: "/profile",
         element: <Profile />,
     },
 ]);
