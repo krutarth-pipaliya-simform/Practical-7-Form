@@ -18,20 +18,22 @@ export const Login = () => {
     });
     const navigate = useNavigate();
 
+    const handleLogin = (data: LogInFormDataType) => {
+        const localData = localStorage.getItem("signUpData");
+        const signUpData = JSON.parse(localData ?? " ");
+
+        if (signUpData?.email === data.email && signUpData?.password === data.password) {
+            localStorage.setItem("isLoggedIn", "true");
+            navigate("/profile");
+        }
+    };
+
     if (isLoggedIn()) return <Navigate to="/profile" />;
 
     return (
         <form
             className="p-4 mx-auto max-w-1/2 flex flex-col gap-6 border rounded-lg"
-            onSubmit={handleSubmit((data) => {
-                const localData = localStorage.getItem("signUpData");
-                const signUpData = JSON.parse(localData ?? " ");
-
-                if (signUpData?.email === data.email && signUpData?.password === data.password) {
-                    localStorage.setItem("isLoggedIn", "true");
-                    navigate("/profile");
-                }
-            })}
+            onSubmit={handleSubmit(handleLogin)}
         >
             <h1 className="text-3xl text-center">Log In</h1>
 
