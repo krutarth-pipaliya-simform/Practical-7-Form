@@ -1,15 +1,20 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import { signUpSchema } from "../schema/signUpSchema";
+import { isLoggedIn } from "../utils/helpers/isLoggedIn";
 
 export const Profile = () => {
+    const navigate = useNavigate();
+
     if (!isLoggedIn()) return <Navigate to={"/signup"} />;
+
     const localData = localStorage.getItem("signUpData");
     const { success, data } = signUpSchema.safeParse(JSON.parse(localData ?? " "));
     if (!success) {
         alert("Please signup if not already");
         return <Navigate to="/signup" />;
     }
+
     const {
         profileImageLink,
         firstName,
@@ -21,9 +26,20 @@ export const Profile = () => {
         city,
         state,
     } = data;
+
     return (
         <div>
-            <img src={profileImageLink} alt="Profile-picture" />
+            <div>
+                <img src={profileImageLink} alt="Profile-picture" />
+                <button
+                    onClick={() => {
+                        localStorage.removeItem("isLoggedIn");
+                        navigate("/signup");
+                    }}
+                >
+                    Log Out
+                </button>
+            </div>
             <div>
                 <span>{firstName + " "}</span>
                 <span>{lastName + " "}</span>
@@ -36,8 +52,4 @@ export const Profile = () => {
             <div>{state}</div>
         </div>
     );
-};
-
-const isLoggedIn = () => {
-    return localStorage.getItem("isLoggedIn") === "true";
 };

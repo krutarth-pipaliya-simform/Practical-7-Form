@@ -1,11 +1,12 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
 import { logInSchema, type LogInFormDataType } from "../schema/logInSchema";
+import { isLoggedIn } from "../utils/helpers/isLoggedIn";
 
 export const Login = () => {
     const {
@@ -16,6 +17,8 @@ export const Login = () => {
         resolver: zodResolver(logInSchema),
     });
     const navigate = useNavigate();
+
+    if (isLoggedIn()) return <Navigate to="/profile" />;
 
     return (
         <form
