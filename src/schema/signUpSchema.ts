@@ -12,7 +12,7 @@ export const signUpSchema = z
         gender: z.enum(["male", "female", "other"], { error: "Please select the gender" }),
         contactNumber: z.string().length(10, { error: "Number should be exactly 10 numbers long" }),
         profileImageLink: z.url({ error: "Please enter a valid URL" }),
-        birthDate: z.string({ error: "Please select a valid Date" }),
+        birthDate: z.string().min(1, { error: "Please select a valid Date" }),
         password: z
             .string()
             .min(8, { error: "Password must be at least 8 characters long." })

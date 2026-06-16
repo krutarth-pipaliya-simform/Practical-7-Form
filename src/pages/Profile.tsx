@@ -36,6 +36,7 @@ export const Profile = () => {
                         localStorage.removeItem("isLoggedIn");
                         navigate("/signup");
                     }}
+                    className="bg-blue-400 rounded-full"
                 >
                     Log Out
                 </button>
