@@ -1,17 +1,15 @@
 import { Navigate, useNavigate } from "react-router-dom";
 
 import { signUpSchema } from "../schema/signUpSchema";
-import { isLoggedIn } from "../utils/helpers/isLoggedIn";
 
 export const Profile = () => {
     const navigate = useNavigate();
 
-    if (!isLoggedIn()) return <Navigate to={"/signup"} />;
-
     const localData = localStorage.getItem("signUpData");
     const { success, data } = signUpSchema.safeParse(JSON.parse(localData ?? " "));
+    // For case when data is tempered.
     if (!success) {
-        alert("Please signup if not already");
+        alert("Data is tempered");
         return <Navigate to="/signup" />;
     }
 

@@ -1,12 +1,11 @@
 import { useForm } from "react-hook-form";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
 import { logInSchema, type LogInFormDataType } from "../schema/logInSchema";
-import { isLoggedIn } from "../utils/helpers/isLoggedIn";
 
 export const Login = () => {
     const {
@@ -24,11 +23,13 @@ export const Login = () => {
 
         if (signUpData?.email === data.email && signUpData?.password === data.password) {
             localStorage.setItem("isLoggedIn", "true");
-            navigate("/profile");
+            if (window.history.length > 1) {
+                navigate(-1);
+            } else {
+                navigate("/profile");
+            }
         }
     };
-
-    if (isLoggedIn()) return <Navigate to="/profile" />;
 
     return (
         <form

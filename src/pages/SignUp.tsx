@@ -11,8 +11,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { signUpSchema, type SignupFormDataType } from "../schema/signUpSchema";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import { isLoggedIn } from "../utils/helpers/isLoggedIn";
+import { Link, useNavigate } from "react-router-dom";
 
 export const SignUp = () => {
     const {
@@ -24,7 +23,6 @@ export const SignUp = () => {
         defaultValues: { birthDate: "1947-08-15" },
     });
     const navigate = useNavigate();
-    if (isLoggedIn()) return <Navigate to="/profile" />;
 
     return (
         <form
