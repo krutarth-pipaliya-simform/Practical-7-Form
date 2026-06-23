@@ -26,7 +26,6 @@ export const Login = () => {
             navigate("/profile");
         }
     };
-    console.log("render");
 
     return (
         <form
