@@ -23,11 +23,7 @@ export const Login = () => {
 
         if (signUpData?.email === data.email && signUpData?.password === data.password) {
             localStorage.setItem("isLoggedIn", "true");
-            if (window.history.length > 1) {
-                navigate(-1);
-            } else {
-                navigate("/profile");
-            }
+            navigate("/profile");
         }
     };
 
